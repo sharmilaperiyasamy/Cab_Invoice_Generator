@@ -18,11 +18,21 @@ namespace Cab_Invoice
         {
             Ride_details ride = new Ride_details();
             list = new List<Ride_details>();
+            Console.WriteLine("Which ride you want to take:\n1.Noramal Ride\n2.Premium Ride");
+            int rideType = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter Distance in Km:");
             ride.distance = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("Enter Time in min:");
             ride.time = Convert.ToDouble(Console.ReadLine());
-            ride.fare = generate.cal_Fare(ride.distance, ride.time);
+            switch (rideType)
+            {
+                case 1:
+                    ride.fare = generate.cal_Fare_forNormalRides(ride.distance, ride.time);
+                    break;
+                case 2:
+                    ride.fare = generate.cal_Fare_forPremiumRides(ride.distance, ride.time);
+                    break;
+            }
             list.Add(ride);
         }
         public void MultipleFare()
