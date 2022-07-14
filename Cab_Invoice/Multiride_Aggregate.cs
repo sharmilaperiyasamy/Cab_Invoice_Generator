@@ -25,7 +25,7 @@ namespace Cab_Invoice
                 count++;
             }
             double ag = fare / count;
-            Console.WriteLine("Aggregate for all rides is : " + ag);
+            Console.WriteLine("--------------Invoice-------------\nTotal Number of rides : " + this.ride.Count + "\nTotal Fare : Rs." + fare + "\nAverage fare per ride : Rs." +ag);
         }
     }
 }

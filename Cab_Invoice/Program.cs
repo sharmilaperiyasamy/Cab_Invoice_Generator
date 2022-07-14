@@ -5,9 +5,9 @@ while (NumberOfRides != 0)
 {
     Console.WriteLine("Enter Ride ID:");
     string id = Console.ReadLine();
-    Console.WriteLine("Enter Distance:");
+    Console.WriteLine("Enter Distance in Km:");
     double dist = Convert.ToDouble(Console.ReadLine());
-    Console.WriteLine("Enter Time:");
+    Console.WriteLine("Enter Time in min:");
     double time = Convert.ToDouble(Console.ReadLine());
     mul.calculateMultipleFare(id, dist, time);
     NumberOfRides--;
