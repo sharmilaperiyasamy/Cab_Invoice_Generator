@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cab_Invoice
 {
-    internal class Invoice
+    public class Invoice
     {
         int cost_per_km = 10;
         int cost_per_min = 1;

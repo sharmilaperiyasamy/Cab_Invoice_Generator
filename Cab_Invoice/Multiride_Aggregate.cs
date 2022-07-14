@@ -8,24 +8,46 @@ namespace Cab_Invoice
 {
     internal class Multiride_Aggregate
     {
-        public Dictionary<string, double> ride = new Dictionary<string, double>();
+        public Dictionary<string, List<Ride_details>> Repo = new Dictionary<string, List<Ride_details>>();
+        public List<Ride_details> list = new List<Ride_details>();
         Invoice generate = new Invoice();
         double fare = 0;
-        public void calculateMultipleFare(string id, double distance, double time)
+
+
+        public void getRideDetails()
         {
-            double fare = generate.cal_Fare(distance, time);
-            this.ride.Add(id, fare);
+            Ride_details ride = new Ride_details();
+            list = new List<Ride_details>();
+            Console.WriteLine("Enter Distance in Km:");
+            ride.distance = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter Time in min:");
+            ride.time = Convert.ToDouble(Console.ReadLine());
+            ride.fare = generate.cal_Fare(ride.distance, ride.time);
+            list.Add(ride);
         }
-        public void calculateAggregate()
+        public void MultipleFare()
         {
-            int count = 0;
-            foreach (var value in this.ride.Values)
+            Console.WriteLine("How many rides you want to take:");
+            int noOfRides = Convert.ToInt32(Console.ReadLine());
+            while (noOfRides != 0)
             {
-                fare = fare + value;
-                count++;
+                Console.WriteLine("Enter User ID:");
+                string userID = Console.ReadLine();
+                getRideDetails();
+                Repo.Add(userID, list.ToList());
+
+                noOfRides--;
             }
-            double ag = fare / count;
-            Console.WriteLine("--------------Invoice-------------\nTotal Number of rides : " + this.ride.Count + "\nTotal Fare : Rs." + fare + "\nAverage fare per ride : Rs." +ag);
+        }
+        public void showInvoice()
+        {
+            Console.WriteLine("Enter user ID to view invoice:");
+            string userID = Console.ReadLine();
+            List<Ride_details> newList = Repo[userID];
+            foreach (var item in newList)
+            {
+                Console.WriteLine("--------------Invoice-------------\nDistance of Journey : " + item.distance + "Km\nTime taken for Journey : " + item.time + "min\nTotal Fare for the rides : Rs" + item.fare);
+            }
         }
     }
 }
